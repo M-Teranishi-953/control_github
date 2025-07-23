@@ -38,7 +38,8 @@ g_nlp = casadi.vertcat(*g_nlp) #複数の制約条件を列方向に連結する
 nlp = {'x': x_nlp,
         'f': f_nlp,
         'g': g_nlp
-        } #'x'はキーという. これを使うとr = S()で出した最適解における決定変数値を引っ張ってくることができる.
+        }
+#'x'はキー. map型みたいになっている. 後に定義するrはmapっぽい構造を持つ. 
 
 #solver objectの生成
 S = casadi.nlpsol('S', 'ipopt', nlp) #最適化問題nlpを, IPOPTという最適化ライブラリを用いて解く, 解法アルゴリズムの用意をしている.
