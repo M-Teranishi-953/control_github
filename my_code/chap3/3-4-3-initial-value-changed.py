@@ -39,7 +39,7 @@ nlp = {'x': x_nlp,
         'f': f_nlp,
         'g': g_nlp
         }
-#'x'はキー. map型みたいになっている. 後に定義するrはmapっぽい構造を持つ. 
+#'x'はキー. map型みたいになっている. 後に定義するrはmapっぽい構造を持つ.
 
 #solver objectの生成
 S = casadi.nlpsol('S', 'ipopt', nlp) #最適化問題nlpを, IPOPTという最適化ライブラリを用いて解く, 解法アルゴリズムの用意をしている.
@@ -80,7 +80,7 @@ ax.set_ylim(0,10)
 ax.axis("equal")  # x軸とy軸の比率を1:1に設定（円が正しく描画されるため）
 
 # 画像として保存
-plt.savefig("images/chap3_NLP_packing_1.png")
+plt.savefig("images/chap3_NLP_packing_2.png")
 
 # 描画を表示
 plt.show()
