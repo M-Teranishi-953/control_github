@@ -53,3 +53,5 @@ ax.add_patch(polyline) #追加
 
 plt.savefig("images/chap3_QP_2D.png")
 plt.show()
+
+S.print_options()
