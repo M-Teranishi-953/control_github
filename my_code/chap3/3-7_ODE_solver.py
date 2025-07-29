@@ -26,7 +26,7 @@ for t in t_eval[:-1]: #最初から、最後の一つ前まで！終端は使わ
     res = F(x0=X[-1]) #X[-1]は現在時刻の状態ベクトX(t)を表すそう。
     X.append(res["xf"])  #Xにresが格納されていく. "xf"はキーであり, 終端値を返す.
 
-#print(res.keys()) dict_keys(['adj_p', 'adj_u', 'adj_x0', 'adj_z0', 'qf', 'xf', 'zf'])
+print(res.keys()) # 出力: dict_keys(['adj_p', 'adj_u', 'adj_x0', 'adj_z0', 'qf', 'xf', 'zf'])
 
 X = np.array(X).reshape(-1,2)
 
