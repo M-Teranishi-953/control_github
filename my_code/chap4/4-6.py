@@ -54,7 +54,8 @@ def make_F():
 
     states_next = casadi.vertcat(x_next,y_next) #次の状態空間の点
 
-    F = casadi.Function("F", [states,ctrls], [states_next])
+    F = casadi.Function("F", [states,ctrls], [states_next],
+                        ["x","u"], ["x_next"])
     return F
 
 # 4.6.3 制御入力0 = 漁を行わない場合の個体数増減のサイクル現象観察
@@ -83,3 +84,50 @@ plt.legend()
 
 plt.savefig("images/chap4_mpc_no_contorl.png")
 plt.show()
+
+
+#4.6.4 評価関数の決定.
+def compute_stage_cost(x,u):
+    x_diff = x - x_ref
+    u_diff = u - u_ref
+    cost = (casadi.dot(Q@x_diff,x_diff)
+            + casadi.dot(R@u_diff,u_diff)) / 2
+    return cost
+
+def compute_terminal_cost(x)
+    x_diff = x - x_ref
+    cost = casadi.dot(Q_f@x_diff,x_diff) / 2
+    return cost
+
+# 4.6.5 最適化問題の定式化
+def make_nlp():
+    F = make_F()
+
+    X = []
+    U =
+    G = []
+
+    J = 0
+
+    for k in range(K):
+        J+=compute_stage_cost(X[k],U[k])
+        eq = X[k+1] - F(x=X[k],u=U[k])["x_next"]
+        G.append(eq)
+    J += compute_terminal_cost(X[-1])
+
+    option = {"print_time":False, "ipopt":{"print_level" :0}}
+    nlp = {
+        "x":casadi.vertcat(*X,*U),
+        "f":J,
+        "g":casadi.vertcat(*G)
+    }
+    S = casadi.nlpsol("S","ipopt",nlp,option)
+    return S
+
+#4.6.6 最適な制御入力を出力する関数の決定
+
+
+#4.6.7 MPCの実行
+
+
+#4.6.8 結果の可視化
