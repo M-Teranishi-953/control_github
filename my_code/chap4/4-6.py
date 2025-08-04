@@ -143,7 +143,7 @@ def make_nlp():
         "g":casadi.vertcat(*G)
     }
     S = casadi.nlpsol("S","ipopt",nlp,option)
-    return S
+    return S ###
 
 #4.6.6 最適な制御入力を出力する関数の決定
 def compute_optimal_control(S,x_init,x0)
