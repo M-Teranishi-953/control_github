@@ -9,6 +9,27 @@ x = casadi.SX.sym("x")
 y = casadi.SX.sym("y")
 
 
+#==============note=================
+# 4.6.1 定数の決定
+#     漸化式の定数部分や、ホライズンや、決定変数の次元、制御入力の次元、評価関数の重みを定義する.
+# 4.6.2 状態方程式の作成.
+#     Fを作る. 微分方程式の定義.
+# 4.6.3 個体数増減の様子
+#     作ったFで、増減の様子を図示するということをやる
+# 4.6.4 評価関数の決定
+#     被食者と捕食者の数を安定化させるために, 適切な制御入力を求めたい. 最適化問題の作成をし, 評価関数を定義する.
+# 4.6.5 最適化問題の定式化
+#     casadiを用いて式4.6の定義をする.
+# 4.6.6 最適な制御入力を出力する関数の決定
+#     最適な制御入力を出力する関数compute_optimal_controlを定義する.
+# 4.6.7 MPCの実行
+
+# 4.6.8 結果の可視化
+#     表示するだけ.
+#==============note=================
+
+
+
 #係数
 a = 0.06
 b = 0.06
@@ -125,6 +146,20 @@ def make_nlp():
     return S
 
 #4.6.6 最適な制御入力を出力する関数の決定
+def compute_optimal_control(S,x_init,x0)
+    x_init = x_init.full().ravel.tolist()
+
+    lbx = x_init + x_lb*K + u_lb*K
+    ubx = x_init + x_ub*K + u_ub*K
+    lbg = [0]*nx*K
+    ubg = [0]*nx*K
+
+    res = S(lbx=lbx, ubx=ubx, lbg=lbg, ung=ubg, x0=x0)
+
+    offset = nx*(K+1)
+    x0 = res["x"]
+    u_opt = x0[offset:offset+nu]
+    return u_opt, x0
 
 
 #4.6.7 MPCの実行
