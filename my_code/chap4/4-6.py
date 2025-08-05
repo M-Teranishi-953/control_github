@@ -35,7 +35,7 @@ y = casadi.SX.sym("y")
 
 
 
-#係数
+#状態方程式で用いる係数
 a = 0.06
 b = 0.06
 c = 0.024
@@ -57,13 +57,13 @@ R = casadi.diag([0.05,0.05]) # 入力側の行列. staging cost用
 
 #制約条件
 x_lb = [0,0]
-x_ub = [np.inf, np.inf]
+x_ub = [np.inf, np.inf] #状態の上限はなし(infty)
 u_lb = [0] #入力下限は0
 u_ub = [1] #入力上限は1
 
 # 目標値
-x_ref = casadi.DM([1,1])
-u_ref = casadi.DM([0])
+x_ref = casadi.DM([1,1]) #2変数. 1,1に近づきたい/
+u_ref = casadi.DM([0]) #入力は0にしたい???
 
 #4.6.2 ロトカ・ヴォルテラ方程式の漁制御問題
 # x_{k+1} = F(x_k, u_k) を表現したい.
